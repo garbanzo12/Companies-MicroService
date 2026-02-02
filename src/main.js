@@ -10,10 +10,8 @@ import { GetCompanies } from './application/use-cases/GetCompanies.js';
 const app = express();
 app.use(express.json());
 
-// Esperamos a que el pool esté listo
 const pool = await poolPromise;
 
-// Inyección de dependencias (Hexagonal puro)
 const repo = new CompanyRepositoryImpl(pool);
 const getCompaniesUseCase = new GetCompanies(repo);
 

@@ -6,7 +6,6 @@ dotenv.config();
 const config = {
     server: process.env.DB_SERVER,
     database: process.env.DB_DATABASE,
-    // La clave de tu éxito anterior:
     connectionString: `Driver={ODBC Driver 18 for SQL Server};Server=${process.env.DB_SERVER};Database=${process.env.DB_DATABASE};Trusted_Connection=yes;Encrypt=yes;TrustServerCertificate=yes;`,
     driver: 'msnodesqlv8',
     options: {
