@@ -1,3 +1,4 @@
+//Archivo dedicado para tratar las variables .env para que los demas archivos no tengan que utilizarlas
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -19,7 +20,7 @@ export const config = {
   }
 };
 
-
+//Valida la existencia de las variables
 if (!config.database.server) {
   throw new Error("❌ CRÍTICO: La variable DB_SERVER no está definida en el .env");
 }

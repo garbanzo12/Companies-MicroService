@@ -1,3 +1,4 @@
+//Caso de uso de obtener una companie por su Id
 export class GetCompaniesById {
   constructor(CompanyRepositoryById) {
     this.CompanyRepositoryById = CompanyRepositoryById;

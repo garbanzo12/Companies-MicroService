@@ -1,3 +1,4 @@
+//Logica de negocio
 export class Company {
   constructor({ id, name, state }) {
     this.id = id

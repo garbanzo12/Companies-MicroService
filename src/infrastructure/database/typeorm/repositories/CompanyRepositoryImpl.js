@@ -7,7 +7,7 @@ export class CompanyRepositoryImpl {
     async findAll() {
         const result = await this.pool.request().query('SELECT Id, Name, State FROM dbo.Companies');
         
-        // Mapeamos los resultados de la tabla a tu Entidad de Dominio
+        // Mapeo de la respuesta
         return result.recordset.map(row => new Company({
             id: row.Id,
             name: row.Name,
@@ -16,8 +16,7 @@ export class CompanyRepositoryImpl {
     }
     async findById(id) {
         const result = await this.pool.request().query(`SELECT Id, Name, State FROM dbo.Companies WHERE Id = ${id}`);
-        if (result.recordset.length === 0) return null
-        // Mapeamos los resultados de la tabla a tu Entidad de Dominio
+        if (result.recordset.length === 0) return null //Validación de existencia del registro 
         const row = result.recordset[0];
         return new Company({id: row.Id, name: row.Name, state: row.State})
     }   

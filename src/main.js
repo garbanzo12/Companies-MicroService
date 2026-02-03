@@ -11,14 +11,15 @@ import {CompanyController} from './infrastructure/http/controllers/CompanyContro
 const app = express();
 app.use(express.json());
 
-const pool = await poolPromise;
+const pool = await poolPromise; // Conexion a la pool mssql  
 
 const repo = new CompanyRepositoryImpl(pool);
 const getCompaniesUseCase = new GetCompanies(repo);
 const getCompaniesByIdUseCase = new GetCompaniesById(repo);
 const companyController = new CompanyController(getCompaniesUseCase, getCompaniesByIdUseCase);
-app.get('/companies', (req, res) => companyController.getAll(req, res));
 
+//Endpoints de companies 
+app.get('/companies', (req, res) => companyController.getAll(req, res));
 app.get('/companies/:id', (req, res) => companyController.getById(req, res));
 
 app.listen(3001, () => {

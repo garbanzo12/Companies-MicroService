@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { config } from '../../../shared/config/index.js'; 
 dotenv.config();
 
+//Conexion a la bd mediante las variables del archivo index.js de la carpeta config
 const dbconfig = {
     server: config.database.server,
     database: config.database.name,
