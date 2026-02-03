@@ -1,9 +1,9 @@
 export class GetCompanies {
-  constructor(companyRepository) {
-    this.companyRepository = companyRepository;
+  constructor(CompanyRepositoryFindAll) {
+    this.CompanyRepositoryFindAll = CompanyRepositoryFindAll;
   }
 
   async execute() {
-    return await this.companyRepository.findAll();
+    return await this.CompanyRepositoryFindAll.findAll();
   }
 }

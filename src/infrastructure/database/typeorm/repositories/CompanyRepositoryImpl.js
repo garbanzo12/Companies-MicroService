@@ -14,4 +14,11 @@ export class CompanyRepositoryImpl {
             state: row.State
         }));
     }
+    async findById(id) {
+        const result = await this.pool.request().query(`SELECT Id, Name, State FROM dbo.Companies WHERE Id = ${id}`);
+        if (result.recordset.length === 0) return null
+        // Mapeamos los resultados de la tabla a tu Entidad de Dominio
+        const row = result.recordset[0];
+        return new Company({id: row.Id, name: row.Name, state: row.State})
+    }   
 }
