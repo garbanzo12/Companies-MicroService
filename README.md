@@ -18,4 +18,8 @@ DB_PASSWORD=tu_password
 DB_DOMAIN=tu_dominio
 
 
+# En caso de algun error verificar las dependencias instaladas
+npm install dotenv express msnodesqlv8 mssql reflect-metadata
 
+# El proyecto usa decorators, por tanto se usa babel decorators
+npm install -D @babel/cli @babel/core @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators @babel/preset-env nodemon
