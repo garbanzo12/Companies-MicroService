@@ -11,7 +11,7 @@ import { GetCompaniesById } from './application/use-cases/GetCompanyById.js';
 import {CompanyController} from './infrastructure/http/controllers/CompanyController.js'
 const app = express();
 app.use(express.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev')); <-- Usar morgan en caso de necesitar observar los tiempos de respuesta, en controllers ya se imprimen respuestas de petición
 const pool = await poolPromise; // Conexion a la pool mssql  
 
 const repo = new CompanyRepositoryImpl(pool);

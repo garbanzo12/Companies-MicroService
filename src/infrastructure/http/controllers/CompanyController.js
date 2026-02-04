@@ -22,7 +22,7 @@ export class CompanyController {
       [10:43:54 a. m.] ❌ GET /companies/11 - No encontrado 
       [10:44:05 a. m.] ✅ GET /companies - Petición exitosa {"count":3}
   */
-
+  
   getAll = async (req, res) => {
     try {
       const companies = await this.getAllCompaniesUseCase.execute();
