@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 dotenv.config();
 
 import express from 'express';
@@ -10,7 +11,7 @@ import { GetCompaniesById } from './application/use-cases/GetCompanyById.js';
 import {CompanyController} from './infrastructure/http/controllers/CompanyController.js'
 const app = express();
 app.use(express.json());
-
+app.use(morgan('dev'));
 const pool = await poolPromise; // Conexion a la pool mssql  
 
 const repo = new CompanyRepositoryImpl(pool);
