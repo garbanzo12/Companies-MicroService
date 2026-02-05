@@ -1,26 +1,26 @@
 import 'reflect-metadata';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 dotenv.config();
 import express from 'express';
 import { poolPromise } from './infrastructure/database/typeorm/mssql-pool.js';
 import { CompanyRepositoryImpl } from './infrastructure/database/typeorm/repositories/CompanyRepositoryImpl.js';
 import { GetCompanies } from './application/use-cases/GetCompanies.js';
+import { GetCompaniesById } from './application/use-cases/GetCompanyById.js';
+import { CompanyController } from './infrastructure/http/controllers/CompanyController.js';
 const app = express();
 app.use(express.json());
-const pool = await poolPromise;
+// app.use(morgan('dev')); <-- Usar morgan en caso de necesitar observar los tiempos de respuesta, en controllers ya se imprimen respuestas de petición
+const pool = await poolPromise; // Conexion a la pool mssql  
+
 const repo = new CompanyRepositoryImpl(pool);
 const getCompaniesUseCase = new GetCompanies(repo);
-app.get('/companies', async (req, res) => {
-  try {
-    const companies = await getCompaniesUseCase.execute();
-    res.json(companies);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      error: 'Error obteniendo compañías'
-    });
-  }
-});
+const getCompaniesByIdUseCase = new GetCompaniesById(repo);
+const companyController = new CompanyController(getCompaniesUseCase, getCompaniesByIdUseCase);
+
+//Endpoints de companies 
+app.get('/companies', (req, res) => companyController.getAll(req, res));
+app.get('/companies/:id', (req, res) => companyController.getById(req, res));
 app.listen(3001, () => {
   console.log('🚀 Microservicio de Compañías (ODBC Nativo) en puerto 3001');
 });
