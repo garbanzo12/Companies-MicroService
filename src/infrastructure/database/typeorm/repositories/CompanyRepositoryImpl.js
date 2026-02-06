@@ -15,7 +15,7 @@ export class CompanyRepositoryImpl {
         }));
     }
     async findById(id) {
-        const result = await this.pool.request().query(`SELECT Id, Name, State FROM dbo.Companies WHERE Id = ${id}`);
+        const result = await this.pool.request().input("id",id).query(`SELECT Id, Name, State FROM dbo.Companies WHERE Id = @id`);
         if (result.recordset.length === 0) return null //Validación de existencia del registro 
         const row = result.recordset[0];
         return new Company({id: row.Id, name: row.Name, state: row.State})
